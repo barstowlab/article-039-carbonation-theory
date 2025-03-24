@@ -1,0 +1,86 @@
+TITLE
+Batch simulation of calcium isotope fractionation compare with Chris Huber
+END
+
+RUNTIME
+time_units              days
+timestep_max            0.001
+timestep_init           1.E-10
+time_tolerance          0.001
+hindmarsh               true
+correction_max          2.0
+debye-huckel            true
+database_sweep          false
+speciate_only           false
+graphics                tecplot
+master                  H+
+database                OldRifleDatabaseLiLi+FakeCO2Mineral.dbs
+gimrt                   true
+screen_output           10000
+JennyDruhan             true
+SetSurfaceAreaConstant  true
+END
+
+OUTPUT
+time_units  days
+spatial_profile       80.0
+time_series           batch.out      1  1  1
+time_series_print     CO2(aq)   Ca++    pH
+time_series_units     mol/kgw  mol/kgw  N.A.
+time_series_interval  1
+END
+
+MINERALS
+CalciteRifle         -label  default -rate  -4.1
+CO2min         -label  default -rate  -7.1
+END
+
+
+condition   amendment
+units            mmol/kg             
+temperature      25.0         
+pH               charge
+Ca++             5.28   
+CO2(aq)          1.0E-6
+
+! Mineral name <volume fraction m3/m3>
+
+CalciteRifle             0.7833831  ssa  1.0
+CO2min                   0.01  ssa  1.0
+END
+
+INITIAL_CONDITIONS
+amendment 1-1
+END                                                                                                
+
+DISCRETIZATION
+distance_units      centimeters
+xzones              1  1.0
+END
+
+POROSITY
+fix_porosity 0.60
+END
+
+PRIMARY_SPECIES
+H+
+Ca++
+CO2(aq)
+END
+
+SECONDARY_SPECIES
+OH-
+HCO3-
+CO3--
+CaHCO3+
+END
+
+TEMPERATURE
+set_temperature  25.0
+END
+
+GASES
+CO2(g)
+END
+
+
