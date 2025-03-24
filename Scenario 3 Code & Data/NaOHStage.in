@@ -1,0 +1,149 @@
+TITLE
+Batch simulation of Magnesium Precipitation
+END
+
+RUNTIME
+time_units              hours
+timestep_max            0.001
+timestep_init           1.E-10
+time_tolerance          0.001
+hindmarsh               true
+correction_max          2.0
+debye-huckel            true
+database_sweep          false
+speciate_only           false
+graphics                Kaleidagraph
+master                  H+
+database                OldRifleDatabaseLiLi.dbs
+gimrt                   true
+screen_output           1000
+JennyDruhan             true
+SetSurfaceAreaConstant  true
+!!restart                 Leachate1.rst  
+!!save_restart            Precipitation1.rst
+END
+
+OUTPUT
+time_units  hours
+!!spatial_profile     0.1
+spatial_profile       0.1
+!!spatial_profile     6.2
+time_series           magnesitebatch.out      1  1  1
+time_series_print     SiO2(aq)   Mg++   Gluconic_acid(aq)  CO2(aq)  Na+  pH
+time_series_units     mol/kgw  mol/kgw  N.A.
+time_series_interval  1
+END
+
+MINERALS
+!!Magnesite       -label  default  -rate  -6.1900
+Magnesite       -label  h+  -rate  -5.8836
+Magnesite       -label  carbonate  -rate  -3.0102
+Magnesite       -label  neutral  -rate  -8.5078
+Quartz          -label  neutral -rate -10.2017
+Amorphous_silica  -label neutral -rate -9.6057
+END
+
+Condition   stage1
+units            mmol/kg             
+temperature      100.0
+pH               charge     
+Mg++             32.0000052451525
+CO2(aq)          CO2(g) 0.00039 fix 
+SiO2(aq)        10.5000004865592
+Gluconic_acid(aq) 97.0000046072528
+Na+              100
+!!Mineral name <volume fraction m3/m3>
+Magnesite            1.0e-10  specific_surface_area 0.1
+Quartz               1.0025259e-10  specific_surface_area 0.1
+Amorphous_silica     1.0001621e-10  specific_surface_area 0.1
+END
+
+INITIAL_CONDITIONS
+stage1 1-1 
+END                                                                                                
+
+DISCRETIZATION
+distance_units      centimeters
+xzones              1  15.0
+END
+
+POROSITY
+fix_porosity 0.99999999
+END
+
+PRIMARY_SPECIES
+H+
+Mg++
+CO2(aq)
+SiO2(aq)
+Gluconic_acid(aq)
+Na+
+END
+
+SECONDARY_SPECIES   
+HCO3-                                                   
+CO3--                                                                   
+H2SiO4--
+!!H4(H2SiO4)4----
+!!H6(H2SiO4)4--                                                                                                                         
+HSiO3-                                                                  
+Mg4(OH)4++++                                                            
+MgCO3(aq)                                                                                                                                 
+MgHCO3+
+Gluconate(aq)                                                                 
+NaCO3-                                                                                                                                 
+NaHCO3(aq)                                                              
+NaHSiO3(aq)                                                             
+NaOH(aq)                                                                
+OH-                                                                                                                                                                                                                                                                                              
+END
+
+GASES
+CO2(g) 
+END
+
+TEMPERATURE
+set_temperature  100.0
+END
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
